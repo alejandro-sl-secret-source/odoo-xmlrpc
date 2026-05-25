@@ -15,20 +15,20 @@ class Odoo
      */
     public static function client(string $url, string $suffix, string $db, string $username, string $password): OdooClientContract
     {
-        $psr17  = new GuzzlePsr7Factory();
         $httpClient   = new GuzzleClient();
+        $httpFactory  = new GuzzlePsr7Factory();
 
         $commonClient = new Client(
             EndPoints::Common->getFullUrl($url, $suffix),
             $httpClient,
-            $psr17,
-            $psr17
+            $httpFactory,
+            $httpFactory
         );
         $objectClient = new Client(
             EndPoints::Object->getFullUrl($url, $suffix),
             $httpClient,
-            $psr17,
-            $psr17
+            $httpFactory,
+            $httpFactory
         );
 
         return new OdooClient(
