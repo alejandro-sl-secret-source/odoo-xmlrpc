@@ -10,8 +10,8 @@ The **Odoo XML-RPC Client** is a PHP package that provides a simple and easy-to-
 
 ## Requirements
 
-- PHP 8.1 or later
-- The laminas/laminas-xmlrpc package
+- PHP 8.3 or later
+- The laminas/laminas-xmlrpc package (version 3.0 or higher)
 
 ## Installation
 You can install the package via composer:
