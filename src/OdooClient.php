@@ -6,6 +6,7 @@ use AlazziAz\OdooXmlrpc\Concern\Filterable;
 use AlazziAz\OdooXmlrpc\Contracts\OdooClientContract;
 use AlazziAz\OdooXmlrpc\DTO\CallParamsDTO;
 use AlazziAz\OdooXmlrpc\Enums\OperationMethods;
+use AlazziAz\OdooXmlrpc\Value\XmlRpcBoolean;
 use Laminas\XmlRpc\Client;
 
 class OdooClient implements OdooClientContract
@@ -48,7 +49,7 @@ class OdooClient implements OdooClientContract
             $this->password,
         ], $params);
 
-        return $this->objectClient->call('execute_kw', $params);
+        return $this->objectClient->call('execute_kw', $this->wrapBooleans($params));
     }
 
     public function getUid(): int
@@ -170,4 +171,17 @@ class OdooClient implements OdooClientContract
     {
         return $this->objectClient;
     }
+
+    private function wrapBooleans(mixed $value): mixed
+    {
+        if (is_bool($value)) {
+            return new XmlRpcBoolean($value);
+        }
+        if (is_array($value)) {
+            return array_map(fn ($v) => $this->wrapBooleans($v), $value);
+        }
+
+        return $value;
+    }
+
 }

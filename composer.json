@@ -25,7 +25,8 @@
     "require": {
         "php": "^8.3.0",
         "laminas/laminas-xmlrpc": "^3.0",
-        "guzzlehttp/guzzle": "^7.10"
+        "guzzlehttp/guzzle": "^7.10",
+        "guzzlehttp/psr7": "^2.10"
     },
     "require-dev": {
         "laravel/pint": "^1.6",
